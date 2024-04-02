@@ -1,0 +1,135 @@
+---------------atividade 19-------------------
+
+
+// Função para verificar se uma pessoa é maior de idade
+function éMaiorDeIdade(idade) {
+    return idade >= 18;
+}
+
+// Função para ler a idade de uma pessoa
+function lerIdadePessoa(numeroPessoa) {
+    let idade = parseInt(prompt("Digite a idade da pessoa " + numeroPessoa + ":"));
+    return idade;
+}
+
+// Função principal
+function contarMaioresDeIdade() {
+    let contadorMaiores = 0;
+
+    for (let i = 1; i <= 10; i++) {
+        let idade = lerIdadePessoa(i);
+        if (éMaiorDeIdade(idade)) {
+            contadorMaiores++;
+        }
+    }
+
+    return contadorMaiores;
+}
+
+// Chamar a função principal e exibir o resultado
+let quantidadeMaiores = contarMaioresDeIdade();
+console.log("Quantidade de pessoas maiores de idade: " + quantidadeMaiores);
+
+
+
+----------------atividade 20---------------
+
+
+// Função para ler um conjunto de 20 números inteiros e retornar o maior valor
+function encontrarMaiorValor() {
+    let maiorValor = Number.MIN_SAFE_INTEGER; // Inicializa o maior valor com o menor valor possível
+
+    // Loop para ler os 20 números inteiros
+    for (let i = 1; i <= 20; i++) {
+        let numero = parseInt(prompt("Digite o número " + i + ":"));
+        if (numero > maiorValor) {
+            maiorValor = numero; // Atualiza o maior valor se o número atual for maior
+        }
+    }
+
+    return maiorValor;
+}
+
+// Chama a função para encontrar o maior valor e exibe o resultado
+let maiorNumero = encontrarMaiorValor();
+console.log("O maior valor fornecido foi: " + maiorNumero);
+
+
+-----------------atividade 21----------------
+
+let soma = 0;
+let quantidade = 0;
+
+while (true) {
+    let numero = parseInt(prompt("Digite um número positivo (ou um número negativo para encerrar):"));
+
+    if (numero < 0) {
+        break; // Encerra o loop quando um número negativo é digitado
+    }
+
+    soma += numero;
+    quantidade++;
+}
+
+if (quantidade > 0) {
+    let media = soma / quantidade;
+    console.log("A soma dos números é: " + soma);
+    console.log("A média dos números é: " + media);
+} else {
+    console.log("Nenhum número positivo foi inserido.");
+}
+
+
+------------CPF validação--------------
+
+function validarCPF(cpf) {
+    // Remove caracteres especiais
+    cpf = cpf.replace(/[^\d]/g, '');
+
+    // Verifica se o CPF possui 11 dígitos
+    if (cpf.length !== 11) {
+        return false;
+    }
+
+    // Calcula o primeiro dígito verificador
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+        soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let resto = soma % 11;
+    let digitoVerificador1 = resto < 2 ? 0 : 11 - resto;
+
+    // Verifica se o primeiro dígito verificador está correto
+    if (parseInt(cpf.charAt(9)) !== digitoVerificador1) {
+        return false;
+    }
+
+    // Calcula o segundo dígito verificador
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+        soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    resto = soma % 11;
+    let digitoVerificador2 = resto < 2 ? 0 : 11 - resto;
+
+    // Verifica se o segundo dígito verificador está correto
+    if (parseInt(cpf.charAt(10)) !== digitoVerificador2) {
+        return false;
+    }
+
+    // CPF válido
+    return true;
+}
+
+// Função para verificar o CPF inserido pelo usuário
+function verificarCPF() {
+    let cpf = prompt("Digite o CPF a ser verificado:");
+    if (validarCPF(cpf)) {
+        alert("CPF válido");
+    } else {
+        alert("CPF inválido");
+    }
+}
+
+// Chamada da função para verificar o CPF
+verificarCPF();
